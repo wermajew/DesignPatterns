@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingletonInheritance", "ConsoleApp1\SingletonInheritance.csproj", "{308E34EB-F6BD-424A-9B01-DDF846816AA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingletonThreads", "SingletonThreads\SingletonThreads.csproj", "{6B142A6B-72FF-4F51-B319-492BA95A3FC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingletonSerialization", "SingletonSerialization\SingletonSerialization.csproj", "{1C9D2CDE-C2F9-4FF4-AEFB-B0643958E25E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{308E34EB-F6BD-424A-9B01-DDF846816AA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{308E34EB-F6BD-424A-9B01-DDF846816AA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{308E34EB-F6BD-424A-9B01-DDF846816AA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B142A6B-72FF-4F51-B319-492BA95A3FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B142A6B-72FF-4F51-B319-492BA95A3FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B142A6B-72FF-4F51-B319-492BA95A3FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B142A6B-72FF-4F51-B319-492BA95A3FC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C9D2CDE-C2F9-4FF4-AEFB-B0643958E25E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C9D2CDE-C2F9-4FF4-AEFB-B0643958E25E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C9D2CDE-C2F9-4FF4-AEFB-B0643958E25E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C9D2CDE-C2F9-4FF4-AEFB-B0643958E25E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
