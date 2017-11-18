@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SingletonThreadSafe;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -14,40 +15,40 @@ namespace SingletonThreads
         {
             // Multithreading testss
             ThreadingTestSingletonNonThreadSafe();
-
             ThreadingTestSingletonThreadSafe();
+
 
             // Measuring Invocation Time
             var threadSafeTime = MeasureElapsedTimeOfGetInstanceInvocation(true);
-            Console.WriteLine($"Elapsed time [THREAD-SAFE] = {threadSafeTime.ElapsedMilliseconds} [ms] that is {threadSafeTime.ElapsedTicks} ticks\n\n");
+            Console.WriteLine($"Elapsed time [THREAD-SAFE] = {threadSafeTime.ElapsedMilliseconds} [ms] " +
+                $"that is {threadSafeTime.ElapsedTicks} ticks\n\n");
 
             var nonThreadSafeTime = MeasureElapsedTimeOfGetInstanceInvocation(false);
-            Console.WriteLine($"Elapsed time [NON-SAFE] = {nonThreadSafeTime.ElapsedMilliseconds} [ms] that is {nonThreadSafeTime.ElapsedTicks} ticks\n\n");
+            Console.WriteLine($"Elapsed time [NON-SAFE] = {nonThreadSafeTime.ElapsedMilliseconds} [ms] " +
+                $"that is {nonThreadSafeTime.ElapsedTicks} ticks\n\n");
+        }
+
+
+        private static void ThreadingTestSingletonNonThreadSafe()
+        {
+
+            var taskAccessingSingleton = Enumerable.Range(0, 10)
+                .Select(t => Task<Singleton>.Factory.StartNew(() => Singleton.GetInstance())).ToArray<Task>();
+
+            Task.WaitAll(taskAccessingSingleton);
+            Console.WriteLine($"Number of instances created by tasks = {Singleton.InstanceCounter}\n\n\n");
+
         }
 
         private static void ThreadingTestSingletonThreadSafe()
         {
-            // 1000 taskow - pararell blalab task poll i wspolbiezne wywolanie - wystartuja razem
-        }
 
-        private static void ThreadingTestSingletonNonThreadSafe()
-        {
-            var thread1 = new Thread(() =>
-            {
-                SingletonThreadSafe.Singleton.GetInstance();
+            var taskAccessingSingleton = Enumerable.Range(0, 10)
+                .Select(t => Task<SingletonThreadingSafe>.Factory.StartNew(() => SingletonThreadingSafe.GetInstance())).ToArray<Task>();
 
-            });
-            var thread2 = new Thread(() =>
-            {
-                SingletonThreadSafe.Singleton.GetInstance();
+            Task.WaitAll(taskAccessingSingleton);
+            Console.WriteLine($"Number of instances created by tasks = {SingletonThreadingSafe.InstanceCounter}\n\n\n");
 
-            });
-
-            thread1.Start();
-            thread2.Start();
-            thread1.Join();
-            thread2.Join();
-            Console.WriteLine("--------------" + SingletonThreadSafe.Singleton.InstanceCounter);
         }
 
         private static Stopwatch MeasureElapsedTimeOfGetInstanceInvocation(bool ifThreadSafe)
@@ -58,11 +59,11 @@ namespace SingletonThreads
             {
                 if (ifThreadSafe)
                 {
-                    var testObject = SingletonThreadSafe.SingletonThreadSafe.GetInstance();
+                    var testObject = SingletonThreadingSafe.GetInstance();
                 }
                 else
                 {
-                    var testObject = SingletonThreadSafe.Singleton.GetInstance();
+                    var testObject = Singleton.GetInstance();
                 }
             }
             watch.Stop();

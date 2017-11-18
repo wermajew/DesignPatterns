@@ -33,7 +33,7 @@ namespace SingletonSerialization
         private Singleton()
         {
             counter++;
-            Console.WriteLine("Instance" + counter);
+            Console.WriteLine($"Instance  number {counter} created\n");
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)

@@ -6,25 +6,25 @@ using System.Threading.Tasks;
 
 namespace SingletonThreadSafe
 {
-    class SingletonThreadSafe
+    class SingletonThreadingSafe
     {
-        private static SingletonThreadSafe _instance = null;
+        private static SingletonThreadingSafe _instance = null;
         private static object syncObject = new object();
-        private int _instanceCounter = 0;
+        public static int InstanceCounter { get; private set; }
 
-        private SingletonThreadSafe()
+        private SingletonThreadingSafe()
         {
-            _instanceCounter++;
-            Console.WriteLine("Instance number = {0}", _instanceCounter);
+            InstanceCounter++;
+            Console.WriteLine("Instance number = {0}", InstanceCounter);
         }
 
-        public static SingletonThreadSafe GetInstance()
+        public static SingletonThreadingSafe GetInstance()
         {
             lock (syncObject)
             {
                 if (_instance == null)
                 {
-                    _instance = new SingletonThreadSafe();
+                    _instance = new SingletonThreadingSafe();
                 }
             }
 

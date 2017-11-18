@@ -8,21 +8,22 @@ namespace SingletonThreadSafe
 {
     class Singleton
     {
-        private static Singleton _instance = null;
-        public static int InstanceCounter { get; private set; }
-
+        private static Singleton _instance;
+        public static int InstanceCounter=0;
         private Singleton()
         {
+            Console.WriteLine("Instance created");
             InstanceCounter++;
         }
 
         public static Singleton GetInstance()
         {
-            if (_instance == null)
-            {
-                _instance = new Singleton();
-            }
-            return _instance;
+                if (null == _instance)
+                {
+                    _instance = new Singleton();
+                }
+
+                return _instance;
         }
     }
 }
